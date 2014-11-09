@@ -83,17 +83,11 @@ namespace PopDownloader
         {
             try
             {
-
                 Properties.Settings.Default.Save();
 
                 connection = new SqlConnection();
                 client = new Pop3Client();
-
-                // Connect to the server
-                client.Connect(textBoxPOPHost.Text, (int)numericUpDownPOPPort.Value, checkBoxPOPUseSSL.Checked);
-
-                // Authenticate ourselves towards the server
-                client.Authenticate(textBoxPOPLogin.Text, textBoxPOPPassword.Text);
+               
 
                 connection.ConnectionString = "Data Source=" + textBoxDBHost.Text +
                     ";Initial Catalog=" + textBoxDBName.Text +
@@ -108,18 +102,29 @@ namespace PopDownloader
 
                 timer1.Start();
                 chengeControlStatuses(true);
-            }
+            }                
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            }            
         }
 
         public void getMessages()
         {
             try
             {
+                timer1.Stop();
+
                 Int32 count = (Int32)countCmd.ExecuteScalar();
+
+                if (!client.Connected)
+                {
+                    // Connect to the server
+                    client.Connect(textBoxPOPHost.Text, (int)numericUpDownPOPPort.Value, checkBoxPOPUseSSL.Checked);
+
+                    // Authenticate ourselves towards the server
+                    client.Authenticate(textBoxPOPLogin.Text, textBoxPOPPassword.Text);
+                }
 
                 // Get the number of messages in the inbox
                 int messageCount =  client.GetMessageCount();
@@ -133,11 +138,15 @@ namespace PopDownloader
                 }
 
                 client.DeleteAllMessages();
-
+                client.Disconnect();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                timer1.Start();
             }
         }
 
