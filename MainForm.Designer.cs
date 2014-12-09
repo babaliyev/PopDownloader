@@ -52,9 +52,11 @@
             this.textBoxDBLogin = new System.Windows.Forms.TextBox();
             this.textBoxDBName = new System.Windows.Forms.TextBox();
             this.textBoxDBHost = new System.Windows.Forms.TextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPOPPort)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -289,11 +291,24 @@
             this.textBoxDBHost.TabIndex = 0;
             this.textBoxDBHost.Text = global::PopDownloader.Properties.Settings.Default.db_host;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(52, 183);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 12;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 220);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonStop);
@@ -307,6 +322,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPOPPort)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -336,6 +352,7 @@
         private System.Windows.Forms.TextBox textBoxDBLogin;
         private System.Windows.Forms.TextBox textBoxDBName;
         private System.Windows.Forms.TextBox textBoxDBHost;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
